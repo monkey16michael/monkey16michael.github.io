@@ -1,10 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-     <title>Template</title>
-     <meta charset="UTF-8">
-  </head>
-  <body>
-    <h1>Title</h1>
+    <head>
+        <meta charset="UTF-8">
+        <title>Superheroes</title>
+
+        <style>
+            img
+            {
+                height: 100px;
+            }
+            td, th
+            {
+                border: 2px solid black;
+                padding: 15px;
+                
+            }
+            table
+            {
+                border-collapse: collapse;
+            }
+            th
+            {
+                background-color: gray;
+                font-size: 18px;
+            }
+        </style>
+
+    </head>
     <body>
- </html>
+        <h1>My Superheroes</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Alias</th>
+                    <th>Image</th>
+                    <th>Superpowers</th>
+                    <th>Weaknesses</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                   <th>Ant-Man</th>
+                    <td>Bruce&nbsp;Lee</td>
+                    <td><a href="images/ant-man.jpg"><img src="images/ant-man.jpg" alt="Ant-Man Pic"></a></td>
+                    <td>Size-shifting</td>
+                    <td>
+                        <ul>
+                            <li>Mental Trauma</li>
+                            <li>Can't Swim</li>
+                            <li>Falls a lot</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Captain America</th>
+                    <td>Tom&nbsp;Cruise</td>
+                    <td><a href="images/Captain America.jpg"><img src="images/Captain America.jpg" alt="Captain America Pic"></a></td>
+                    <td>
+                        <ul>
+                            <li>Peak Humman Strength</li>
+                            <li>Run Fast</li>
+                            <li>Fast Flyer</li>
+                        </ul>
+                    </td>
+                    <td>
+                        Fear of loud nosies
+                        Can't Fly
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>
