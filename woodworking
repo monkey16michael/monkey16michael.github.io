@@ -1,0 +1,416 @@
+from fpdf import FPDF
+
+class CuttingBoardPlan:
+    def __init__(self):
+        self.pdf = FPDF()
+        self.pdf.set_font("Arial", size=10)
+        
+    def add_title_page(self):
+        """Create professional title page"""
+        self.pdf.add_page()
+        self.pdf.set_font("Arial", "B", 24)
+        self.pdf.cell(0, 20, "Professional End-Grain", ln=True, align="C")
+        self.pdf.cell(0, 20, "Cutting Board Plan", ln=True, align="C")
+        self.pdf.ln(10)
+        self.pdf.set_font("Arial", "I", 14)
+        self.pdf.cell(0, 10, "Etsy Edition | Complete Woodworking Guide", ln=True, align="C")
+        self.pdf.ln(20)
+        
+        self.pdf.set_font("Arial", "B", 11)
+        specs = [
+            "Finished Dimensions: 12\" × 16\" × 1.75\"",
+            "Skill Level: Intermediate",
+            "Build Time: 6–8 hours (excluding drying)",
+            "Market Value: $55–$85",
+            "Plan Version: 2.0 – Etsy Optimized Edition"
+        ]
+        for spec in specs:
+            self.pdf.cell(0, 8, spec, ln=True, align="C")
+    
+    def add_toc(self):
+        """Add Table of Contents"""
+        self.pdf.add_page()
+        self.pdf.set_font("Arial", "B", 14)
+        self.pdf.cell(0, 10, "TABLE OF CONTENTS", ln=True)
+        self.pdf.set_font("Arial", "", 10)
+        self.pdf.ln(5)
+        
+        toc_items = [
+            "1. Professional Photography & Visual Guide",
+            "2. Construction Fundamentals",
+            "3. Materials & Tools",
+            "4. Step-by-Step Construction",
+            "5. Etsy Photography & Listing Optimization",
+            "6. Business & Production Strategy",
+            "7. Selling Your Woodworking Plan",
+            "8. Troubleshooting & Tips",
+            "9. Final Checklists",
+        ]
+        
+        for item in toc_items:
+            self.pdf.cell(0, 8, item, ln=True)
+    
+    def add_heading(self, text, level=1):
+        """Add section headings"""
+        sizes = {1: 16, 2: 13, 3: 11}
+        self.pdf.set_font("Arial", "B", sizes.get(level, 10))
+        self.pdf.ln(5)
+        self.pdf.cell(0, 8, text, ln=True)
+        self.pdf.set_font("Arial", "", 10)
+    
+    def add_text(self, text):
+        """Add body text with wrapping"""
+        self.pdf.set_font("Arial", "", 10)
+        self.pdf.multi_cell(0, 5, text)
+        self.pdf.ln(2)
+    
+    def add_bullet_list(self, items):
+        """Add bulleted list"""
+        self.pdf.set_font("Arial", "", 10)
+        for item in items:
+            self.pdf.cell(5, 5, "• ")
+            self.pdf.multi_cell(0, 5, item)
+            self.pdf.ln(1)
+    
+    def add_section_1(self):
+        """Section 1: Professional Photography"""
+        self.pdf.add_page()
+        self.add_heading("SECTION 1: Professional Photography & Visual Guide", 1)
+        
+        self.add_text("Before diving into construction, understand that your finished photos will make or break sales. Successful Etsy cutting board listings (those generating $1,000+/month) follow these photography standards:")
+        
+        self.add_heading("Professional Lighting Setup", 2)
+        self.add_text("Essential Equipment ($50–150 investment):")
+        self.add_bullet_list([
+            "White seamless backdrop paper (24–36 inches wide)",
+            "Two clip lamps or work lights (500W equivalent each)",
+            "White foam board bounce reflector",
+            "Tripod",
+            "Diffuser fabric or large white sheet"
+        ])
+        
+        self.add_heading("Setup:", 2)
+        self.add_bullet_list([
+            "Pull backdrop paper down onto surface beneath board (creates curved background)",
+            "Position lights 45° from subject (one on each side, slightly elevated)",
+            "Place white bounce board opposite key light to fill shadows",
+            "Camera on tripod at eye level (12–18\" from board surface)",
+            "NO on-camera flash – only window light or diffused work lights"
+        ])
+        
+        self.add_heading("Key Photos to Capture", 2)
+        photos = [
+            "1. Hero Shot (Most Important) - Board at 45° angle showing front and one long side. Juice groove and finger grips clearly visible.",
+            "2. Overhead Flat Lay - Board flat, centered. Shows complete end-grain checkerboard pattern.",
+            "3. Lifestyle/Styling Shot - Board with fresh ingredients, hands cutting. Kitchen setting.",
+            "4. Detail Close-Up - Grain pattern, wood colors, finish quality.",
+            "5. Finger Grip Detail - Hand gripping board showing comfort and design.",
+            "6. Size Reference - Board with common object for scale clarity."
+        ]
+        self.add_bullet_list(photos)
+    
+    def add_section_2(self):
+        """Section 2: Construction Fundamentals"""
+        self.pdf.add_page()
+        self.add_heading("SECTION 2: Construction Fundamentals", 1)
+        
+        self.add_heading("Project Overview", 2)
+        self.add_text("An end-grain cutting board features wood grain perpendicular to the cutting surface, creating a distinctive checkerboard appearance with superior self-healing properties.")
+        
+        self.add_heading("Key Design Features", 2)
+        features = [
+            "Reversible surface – Two usable sides extends life",
+            "Juice groove – Practical recessed channel (highly sought by buyers)",
+            "Finger grips – Recessed handles for easy transport",
+            "Durable construction – 1.75\" thickness ensures stability",
+            "Scalable design – Easily adapt to custom sizes"
+        ]
+        self.add_bullet_list(features)
+    
+    def add_section_3(self):
+        """Section 3: Materials & Tools"""
+        self.pdf.add_page()
+        self.add_heading("SECTION 3: Materials & Tools", 1)
+        
+        self.add_heading("Wood Selection (Food-Safe Hardwoods)", 2)
+        self.add_text("Recommended Species for end-grain contrast:")
+        woods = [
+            "Hard Maple - Pale/white (Janka 1450) - Base/primary color",
+            "Walnut - Dark brown (Janka 1010) - Dramatic contrast",
+            "Cherry - Reddish-brown (Janka 995) - Warm mid-tone",
+            "Ash - Light tan (Janka 1320) - Subtle tone",
+            "Beech - Pale yellow (Janka 1300) - Consistent tone"
+        ]
+        self.add_bullet_list(woods)
+        
+        self.add_heading("Essential Tools", 2)
+        tools = [
+            "Table saw (for ripping strips)",
+            "Jointer or jointer plane",
+            "Thickness planer",
+            "Miter saw or crosscut sled",
+            "Clamps (minimum 8 × 24\" parallel clamps)",
+            "1.5\" Forstner bit (for finger grips)",
+            "Orbital sander",
+            "Router with roundover bit (for juice groove)"
+        ]
+        self.add_bullet_list(tools)
+        
+        self.add_heading("Materials List", 2)
+        materials = [
+            "(4) 1\" × 3\" × 12\" Maple boards",
+            "(4) 1\" × 3\" × 12\" Walnut boards",
+            "(2) 1\" × 3\" × 12\" Cherry boards [optional]",
+            "Titebond III waterproof wood glue",
+            "Sandpaper: 120-grit, 150-grit, 220-grit",
+            "Food-grade mineral oil and beeswax",
+            "Masking tape"
+        ]
+        self.add_bullet_list(materials)
+    
+    def add_section_4(self):
+        """Section 4: Step-by-Step Construction"""
+        self.pdf.add_page()
+        self.add_heading("SECTION 4: Step-by-Step Construction", 1)
+        
+        self.add_heading("Phase 1: Preparation & Milling", 2)
+        self.add_text("Step 1 – Inspect Wood: Choose boards with no knots, cracks, or blemishes. Verify straightness and flatness.")
+        self.add_text("Step 2 – Rip Strips: Set table saw for 3\" width. Rip all boards to uniform width.")
+        self.add_text("Step 3 – Crosscut to Length: Cut all strips to exactly 12\" length. Use miter saw for 90° accuracy.")
+        
+        self.add_heading("Phase 2: Assembly Preparation", 2)
+        self.add_text("Step 4 – Joint & Plane: Run all strips through jointer. Plane to uniform 1\" thickness.")
+        self.add_text("Step 5 – Plan Layout: Arrange strips in alternating pattern for visual balance.")
+        self.add_text("Step 6 – Glue Application: Use Titebond III. Apply thin bead along edge of each strip.")
+        self.add_text("Step 7 – Clamp Assembly: Place strips in order, apply clamps every 4–6 inches. Leave clamped minimum 6 hours.")
+        
+        self.add_heading("Phase 3: Surfacing & Shaping", 2)
+        self.add_text("Step 8 – Remove from Clamps: Clean excess glue. Assembled glue-up is now 1.75\" thick.")
+        self.add_text("Step 9 – Cut Juice Groove: Mark 0.5\" from edge. Use router with roundover bit.")
+        self.add_text("Step 10 – Create Finger Grips: Mark grip centers. Use 1.5\" Forstner bit, drill 0.75\" deep.")
+        self.add_text("Step 11 – Sand All Surfaces: 120-grit → 150-grit → 220-grit. Sand with grain direction.")
+        self.add_text("Step 12 – Round Edges: Break all sharp edges with 220-grit sandpaper.")
+        
+        self.add_heading("Phase 4: Finishing", 2)
+        self.add_text("Step 13 – Final Cleaning: Vacuum dust. Wipe with tack cloth. Wait 30 minutes.")
+        self.add_text("Step 14 – Food-Grade Finish: Apply mineral oil, then dust beeswax powder on wet surface. Allow 24-hour cure.")
+    
+    def add_section_5(self):
+        """Section 5: Etsy Optimization"""
+        self.pdf.add_page()
+        self.add_heading("SECTION 5: Etsy Photography & Listing Optimization", 1)
+        
+        self.add_heading("Title Optimization (Keyword-Rich)", 2)
+        self.add_text("Format: [Wood Type] End Grain Cutting Board | [Feature] | [Size] | Handmade [Optional Gift]")
+        examples = [
+            "Walnut & Maple End Grain Cutting Board | 12x16 Reversible",
+            "Cherry & Ash End Grain Board with Juice Groove | Handmade",
+            "Personalized Cutting Board | Walnut, Maple & Cherry | Gift for Chef"
+        ]
+        self.add_bullet_list(examples)
+        
+        self.add_heading("SEO Keywords", 2)
+        keywords = [
+            "End-grain cutting board",
+            "Wooden chopping board",
+            "Handmade",
+            "Juice groove",
+            "Reversible",
+            "Personalized/custom",
+            "Wood species names"
+        ]
+        self.add_bullet_list(keywords)
+        
+        self.add_heading("Pricing Strategy", 2)
+        self.add_text("Base Price (12\" × 16\" standard): $55–$75")
+        self.add_text("Premium Options:")
+        pricing = [
+            "Three-color pattern: +$10–$15",
+            "Personalization/engraving: +$15–$25",
+            "Larger size (14\" × 18\"): +$15–$20",
+            "Exotic woods: +$10–$30",
+            "Premium hand-rubbed finish: +$5–$10"
+        ]
+        self.add_bullet_list(pricing)
+    
+    def add_section_6(self):
+        """Section 6: Business Strategy"""
+        self.pdf.add_page()
+        self.add_heading("SECTION 6: Business & Production Strategy", 1)
+        
+        self.add_heading("Batch Production for Profitability", 2)
+        self.add_text("Efficiency Breakdown:")
+        efficiency = [
+            "Material prep (ripping, planing): 2–3 hours per 5 boards",
+            "Glue-up & clamping: 30 min per batch",
+            "Surfacing & shaping: 1.5–2 hours per board",
+            "Finishing: 30 min per board (+ 24-hour cure)",
+            "Total per board: 4–5 hours active work"
+        ]
+        self.add_bullet_list(efficiency)
+        
+        self.add_heading("Cost Analysis", 2)
+        self.add_text("Single Board:")
+        costs = [
+            "Wood (3 species): $40–$60",
+            "Glue, sandpaper, finish: $3–$5",
+            "Packaging: $2–$3",
+            "Total Materials: $45–$68",
+            "Labor (5 hrs @ $20/hr): $100",
+            "TOTAL COST: $145–$168"
+        ]
+        self.add_bullet_list(costs)
+        
+        self.add_text("Batch Production (5+ boards) spreads overhead:")
+        self.add_text("Labor per board: $20")
+        self.add_text("Total cost per board: $65–$88")
+        self.add_text("Retail price: $65–$85")
+        self.add_text("MARGIN: Becomes viable at batch production scale")
+        
+        self.add_heading("Best-Selling Variations", 2)
+        variations = [
+            "Premium: Three-Color End-Grain ($75–$85) - Highest margins",
+            "Standard: Two-Color Board ($55–$70) - Steady demand",
+            "Entry: Solid Hardwood ($45–$60) - High volume"
+        ]
+        self.add_bullet_list(variations)
+    
+    def add_section_7(self):
+        """Section 7: Selling the Plan"""
+        self.pdf.add_page()
+        self.add_heading("SECTION 7: Selling Your Woodworking Plan", 1)
+        
+        self.add_heading("Plan Listing Title", 2)
+        self.add_text("Professional End-Grain Cutting Board Plan – Etsy-Proven Design with Photography Guide")
+        
+        self.add_heading("What's Included", 2)
+        included = [
+            "Step-by-step photo instructions",
+            "Complete materials & tools lists",
+            "Professional photography guide",
+            "Etsy optimization strategies",
+            "Pricing & production efficiency tips",
+            "Marketing copy templates",
+            "Design variations",
+            "Troubleshooting section",
+            "PDF format (printable, color, 20+ pages)",
+            "Professional layout with diagrams"
+        ]
+        self.add_bullet_list(included)
+        
+        self.add_heading("Plan Pricing", 2)
+        self.add_text("Standard pricing: $19–$29")
+        self.add_text("Position as premium due to photography + business strategy inclusion")
+        self.add_text("Launch discount: $14–$17 to encourage early reviews")
+        self.add_text("Bundles: Plan + Care Card Template at $22–$24")
+    
+    def add_section_8(self):
+        """Section 8: Troubleshooting"""
+        self.pdf.add_page()
+        self.add_heading("SECTION 8: Troubleshooting & Tips", 1)
+        
+        self.add_heading("Common Problems & Solutions", 2)
+        problems = [
+            "Gaps between strips → Use jointer before glue-up; apply even clamp pressure",
+            "Glue joints separate → Use Titebond III; work faster; extend clamp time",
+            "Grain tear-out → Sand with grain; use 120-grit minimum",
+            "Finish sticky → Wipe excess; allow full 24-hour cure",
+            "Warping observed → Apply finish both sides equally; climate control",
+            "Splinter-prone groove → Use roundover bit; 220-grit sanding; hand-sand smooth"
+        ]
+        self.add_bullet_list(problems)
+    
+    def add_checklists(self):
+        """Add Final Checklists"""
+        self.pdf.add_page()
+        self.add_heading("FINAL CHECKLIST: From Build to Sale", 1)
+        
+        self.add_heading("Build Checklist", 2)
+        build = [
+            "Wood selected, inspected, planed to uniform thickness",
+            "Strips ripped to uniform 3\" width, crosscut to 12\"",
+            "Layout planned and photographed",
+            "Glue-up square and clamped 6+ hours",
+            "Excess glue removed, surface flat",
+            "Juice groove routed and sanded",
+            "Finger grips drilled and sanded smooth",
+            "All surfaces sanded 120→150→220 grit",
+            "Edges rounded, splinters eliminated",
+            "Final dust removal completed"
+        ]
+        self.add_bullet_list(build)
+        
+        self.add_heading("Photography Checklist", 2)
+        photos_check = [
+            "White backdrop paper set up",
+            "Lighting positioned (45° angles)",
+            "Hero shot captured",
+            "Overhead flat lay taken",
+            "Lifestyle/styled shot with food",
+            "Detail close-up taken",
+            "Size reference photo taken",
+            "10 best photos selected and color-corrected",
+            "Photos optimized for web (1200px, 72 DPI)"
+        ]
+        self.add_bullet_list(photos_check)
+        
+        self.add_heading("Listing Checklist", 2)
+        listing_check = [
+            "Title includes keywords (end-grain, size, wood types)",
+            "10 photos uploaded (all slots used)",
+            "Description written with features & benefits",
+            "Price set competitively ($55–$85 range)",
+            "Tags optimized (best 13 tags)",
+            "Shipping cost calculated ($12–$18)",
+            "Care instructions card included",
+            "First board tested for splinters"
+        ]
+        self.add_bullet_list(listing_check)
+    
+    def add_conclusion(self):
+        """Add final conclusion page"""
+        self.pdf.add_page()
+        self.add_heading("CONCLUSION", 1)
+        
+        conclusion_data = [
+            ("Plan Version:", "2.0 – Etsy Optimized Edition"),
+            ("Updated:", "December 2025"),
+            ("Recommended Retail Price:", "$55–$85"),
+            ("Market Demand:", "High (consistent bestseller)"),
+            ("Skill Level:", "Intermediate"),
+            ("Estimated Production Time:", "4–5 hours (batch production)"),
+        ]
+        
+        for label, value in conclusion_data:
+            self.pdf.set_font("Arial", "B", 10)
+            self.pdf.cell(60, 8, label)
+            self.pdf.set_font("Arial", "", 10)
+            self.pdf.cell(0, 8, value, ln=True)
+        
+        self.pdf.ln(10)
+        self.add_text("This professional guide provides complete woodworking, photography, and business strategy for selling cutting boards. Follow all safety procedures, use food-grade materials exclusively, and provide clear care instructions with each board.")
+        self.add_text("Ready to sell on Etsy! Download and start your cutting board business today.")
+    
+    def generate(self, filename="cutting_board_plan.pdf"):
+        """Generate complete PDF"""
+        self.add_title_page()
+        self.add_toc()
+        self.add_section_1()
+        self.add_section_2()
+        self.add_section_3()
+        self.add_section_4()
+        self.add_section_5()
+        self.add_section_6()
+        self.add_section_7()
+        self.add_section_8()
+        self.add_checklists()
+        self.add_conclusion()
+        
+        self.pdf.output(filename)
+        return filename
+
+# USAGE:
+if __name__ == "__main__":
+    plan = CuttingBoardPlan()
+    filename = plan.generate("cutting_board_plan.pdf")
+    print(f"✓ Professional PDF generated: {filename}")
