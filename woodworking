@@ -1,577 +1,97 @@
-"""
-cutting_board_plan.py
-
-Generates a professional multi-page PDF:
-"Professional End-Grain Cutting Board Plan – Etsy Edition"
-Requires: fpdf2  (pip install fpdf2)
-"""
-
-from fpdf import FPDF
-
-
-class CuttingBoardPlan:
-    def __init__(self):
-        self.pdf = FPDF()
-        self.pdf.set_auto_page_break(auto=True, margin=15)
-        self.pdf.set_font("Arial", size=10)
-
-    # ---------- basic helpers ----------
-
-    def add_heading(self, text, level=1):
-        sizes = {1: 16, 2: 13, 3: 11}
-        self.pdf.ln(4)
-        self.pdf.set_font("Arial", "B", sizes.get(level, 10))
-        self.pdf.multi_cell(0, 7, text)
-        self.pdf.ln(1)
-        self.pdf.set_font("Arial", "", 10)
-
-    def add_text(self, text):
-        self.pdf.set_font("Arial", "", 10)
-        self.pdf.multi_cell(0, 5, text)
-        self.pdf.ln(1)
-
-    def add_bullet_list(self, items):
-        self.pdf.set_font("Arial", "", 10)
-        for item in items:
-            self.pdf.cell(4, 5, "•")
-            self.pdf.multi_cell(0, 5, item)
-        self.pdf.ln(1)
-
-    # ---------- pages ----------
-
-    def add_title_page(self):
-        self.pdf.add_page()
-        self.pdf.set_font("Arial", "B", 24)
-        self.pdf.ln(30)
-        self.pdf.cell(0, 12, "Professional End-Grain", ln=True, align="C")
-        self.pdf.cell(0, 12, "Cutting Board Plan", ln=True, align="C")
-        self.pdf.ln(10)
-        self.pdf.set_font("Arial", "I", 14)
-        self.pdf.cell(0, 8, "Etsy Edition | Complete Woodworking Guide", ln=True, align="C")
-        self.pdf.ln(18)
-
-        self.pdf.set_font("Arial", "", 11)
-        specs = [
-            'Finished Dimensions: 12" × 16" × 1.75"',
-            "Skill Level: Intermediate",
-            "Build Time: 6–8 hours (excluding drying)",
-            "Market Value: $55–$85",
-            "Plan Version: 2.0 – Etsy Optimized Edition",
-        ]
-        for spec in specs:
-            self.pdf.cell(0, 7, spec, ln=True, align="C")
-
-    def add_toc(self):
-        self.pdf.add_page()
-        self.add_heading("TABLE OF CONTENTS", 1)
-        toc_items = [
-            "1. Professional Photography & Visual Guide",
-            "2. Construction Fundamentals",
-            "3. Materials & Tools",
-            "4. Step-by-Step Construction",
-            "5. Etsy Photography & Listing Optimization",
-            "6. Business & Production Strategy",
-            "7. Selling Your Woodworking Plan",
-            "8. Troubleshooting & Tips",
-            "9. Final Checklists",
-        ]
-        self.pdf.set_font("Arial", "", 10)
-        for item in toc_items:
-            self.pdf.cell(0, 6, item, ln=True)
-
-    def add_section_1(self):
-        self.pdf.add_page()
-        self.add_heading("SECTION 1: Professional Photography & Visual Guide", 1)
-
-        self.add_heading("Hero Product Photos: What Etsy Best-Sellers Show", 2)
-        self.add_text(
-            "Before diving into construction, understand that your finished photos will make or break "
-            "sales. Successful Etsy cutting board listings (those generating $1,000+/month) follow "
-            "these photography standards."
-        )
-
-        self.add_heading("Professional Lighting Setup", 3)
-        self.add_text("Essential Equipment ($50–150 investment):")
-        self.add_bullet_list([
-            "White seamless backdrop paper (24–36 inches wide)",
-            "Two clip lamps or work lights (500W equivalent each)",
-            "White foam board bounce reflector",
-            "Tripod",
-            "Diffuser fabric or large white sheet",
-        ])
-
-        self.add_heading("Setup", 3)
-        self.add_bullet_list([
-            "Pull backdrop paper down onto surface beneath board (creates curved background).",
-            "Position lights 45° from subject (one on each side, slightly elevated).",
-            "Place white bounce board opposite key light to fill shadows.",
-            'Camera on tripod at eye level (12–18" from board surface).',
-            "NO on-camera flash – only window light or diffused work lights.",
-        ])
-
-        self.add_heading("Key Photos to Capture", 3)
-        self.add_bullet_list([
-            "Hero Shot (Most Important): Board at 45° angle showing front and one long side. "
-            "Juice groove and finger grips clearly visible. Natural shadows, vibrant colors, no glare.",
-            "Overhead Flat Lay: Board flat, centered. Shows complete end-grain checkerboard pattern.",
-            "Lifestyle/Styling Shot: Board with fresh ingredients, hands positioned as if cutting.",
-            "Detail Close-Up: Grain pattern, wood color contrast, finish quality.",
-            "Finger Grip Detail: Hand gripping/holding board, showing comfort and thickness.",
-            "Size Reference: Board with coffee cup, hand, or ruler for scale.",
-        ])
-
-        self.add_heading("Color Accuracy & Styling", 3)
-        self.add_text("Proven Etsy Winners:")
-        self.add_bullet_list([
-            "Warm, natural daylight preferred over artificial lights.",
-            "Light wood or white surfaces as background (NOT busy patterns).",
-            "Fresh, clean appearance – no dust or wood debris.",
-            "Styling with fresh food (culinary context).",
-            "Hands in photos create connection and lifestyle appeal.",
-            "Multiple wood combinations shown (if offering variations).",
-        ])
-
-        self.add_text("What Gets Lower Engagement:")
-        self.add_bullet_list([
-            "Dark backgrounds.",
-            "On-camera flash (flat, washed-out appearance).",
-            "No lifestyle context.",
-            "Overly styled or fake appearance.",
-            "Poor lighting with heavy shadows.",
-        ])
-
-    def add_section_2(self):
-        self.pdf.add_page()
-        self.add_heading("SECTION 2: Construction Fundamentals", 1)
-
-        self.add_heading("Project Overview", 2)
-        self.add_text(
-            "An end-grain cutting board features wood grain perpendicular to the cutting surface, "
-            "creating a distinctive checkerboard appearance with superior self-healing properties. "
-            "This is the bestselling style on Etsy for high-margin woodworking businesses."
-        )
-
-        self.add_text("Core specs:")
-        self.add_bullet_list([
-            'Finished Dimensions: 12" × 16" × 1.75"',
-            "Skill Level: Intermediate",
-            "Estimated Build Time: 6–8 hours (excluding drying)",
-            "Market Value: $55–$85",
-        ])
-
-        self.add_heading("Key Design Features", 2)
-        self.add_bullet_list([
-            "Reversible surface – two usable sides extend life.",
-            "Juice groove – practical recessed channel (highly sought by buyers).",
-            "Finger grips – recessed handles for easy transport.",
-            'Durable construction – 1.75" thickness ensures stability.',
-            "Scalable design – easily adapt to custom sizes.",
-        ])
-
-    def add_section_3(self):
-        self.pdf.add_page()
-        self.add_heading("SECTION 3: Materials & Tools", 1)
-
-        self.add_heading("Wood Selection (Food-Safe Hardwoods)", 2)
-        self.add_text("Recommended species for end-grain contrast:")
-        self.add_bullet_list([
-            "Hard Maple – pale/white (Janka 1450) – base/primary color, bright contrast.",
-            "Walnut – dark brown (Janka 1010) – dramatic contrast, premium appearance.",
-            "Cherry – reddish-brown (Janka 995) – warm mid-tone, elegant look.",
-            "Ash – light tan (Janka 1320) – subtle tone, balanced design.",
-            "Beech – pale yellow (Janka 1300) – consistent tone, uniform pattern.",
-        ])
-
-        self.add_text("Sourcing strategy:")
-        self.add_bullet_list([
-            'Purchase 1" × 3" × 12" pre-planed boards to save milling time.',
-            "Buy 4 boards of first color, 4 of second color, 2 of third color (optional).",
-            "Typical cost: $8–$15 per board (total wood cost about $80–$150 per finished board).",
-        ])
-
-        self.add_heading("Essential Tools", 2)
-        self.add_text("Must have:")
-        self.add_bullet_list([
-            "Table saw (for ripping strips).",
-            "Jointer or jointer plane.",
-            "Thickness planer.",
-            "Miter saw or crosscut sled.",
-            'Clamps (minimum 8 × 24" parallel clamps).',
-            '1.5" Forstner bit (for finger grips).',
-            "Orbital sander.",
-            "Router with roundover bit (for juice groove).",
-        ])
-
-        self.add_text("Nice to have:")
-        self.add_bullet_list([
-            "Biscuit jointer (improves alignment precision).",
-            "Planer thicknesser (batch efficiency).",
-            "Taper jig (angled grips).",
-        ])
-
-        self.add_heading("Materials List", 2)
-        self.add_bullet_list([
-            '(4) 1" × 3" × 12" Maple boards',
-            '(4) 1" × 3" × 12" Walnut boards',
-            '(2) 1" × 3" × 12" Cherry boards [optional for contrast]',
-            "Titebond III waterproof wood glue",
-            "Sandpaper: 120-grit, 150-grit, 220-grit",
-            "Food-grade mineral oil and beeswax",
-            "Masking tape",
-        ])
-
-    def add_section_4(self):
-        self.pdf.add_page()
-        self.add_heading("SECTION 4: Step-by-Step Construction", 1)
-
-        self.add_heading("Phase 1: Preparation & Milling", 2)
-        self.add_text("Step 1 – Inspect Wood:")
-        self.add_bullet_list([
-            "Choose boards with no knots, cracks, or major blemishes.",
-            "Verify straightness and flatness.",
-            'Confirm all boards are exactly 1" thick after planing.',
-        ])
-
-        self.add_text("Step 2 – Rip Strips:")
-        self.add_bullet_list([
-            'Set table saw for 3" width and rip all boards to uniform width.',
-            "Check for parallel edges for tight glue-ups.",
-        ])
-
-        self.add_text("Step 3 – Crosscut to Length:")
-        self.add_bullet_list([
-            'Cut all strips to exactly 12" length.',
-            "Use miter saw or crosscut sled for 90° accuracy.",
-            "Label strips by color to simplify assembly.",
-        ])
-
-        self.add_heading("Phase 2: Assembly Preparation", 2)
-        self.add_text("Step 4 – Joint & Plane:")
-        self.add_bullet_list([
-            "Run all strips through jointer to create one flat face.",
-            'Plane to uniform 1" thickness for gap-free glue joints.',
-        ])
-
-        self.add_text("Step 5 – Plan Layout:")
-        self.add_bullet_list([
-            "Arrange strips in alternating pattern (e.g., Maple → Walnut → Maple → Walnut → Cherry → Maple).",
-            "Balance colors visually.",
-            "Photograph layout for reference during glue-up.",
-        ])
-
-        self.add_text("Step 6 – Glue Application:")
-        self.add_bullet_list([
-            "Use Titebond III (waterproof, FDA compliant when cured).",
-            "Apply thin bead along the edge of each strip.",
-            "Work within roughly a 10-minute assembly window.",
-        ])
-
-        self.add_text("Step 7 – Clamp Assembly:")
-        self.add_bullet_list([
-            "Place first strip on a protective caul.",
-            "Stack remaining strips in planned order.",
-            "Apply clamps every 4–6 inches along the width.",
-            "Alternate clamp pressure from top and bottom.",
-            "Check diagonals for square and adjust as needed.",
-            "Leave clamped for at least 6 hours (overnight recommended).",
-        ])
-
-        self.add_heading("Phase 3: Surfacing & Shaping", 2)
-        self.add_text("Step 8 – Remove from Clamps:")
-        self.add_bullet_list([
-            "Scrape excess glue with chisels or scrapers.",
-            "Plane lightly if needed for a flat surface.",
-            'Resulting blank is now about 1.75" thick.',
-        ])
-
-        self.add_text("Step 9 – Cut Juice Groove:")
-        self.add_bullet_list([
-            'Mark a line 0.5" from edge, running full length of one face.',
-            'Target groove size: 0.25" deep × 0.5" wide (approx.).',
-            "Use router with suitable bit and then sand groove smooth (220-grit).",
-        ])
-
-        self.add_text("Step 10 – Create Finger Grips:")
-        self.add_bullet_list([
-            'Mark two grip centers (one on each short end, about 2" from edge).',
-            'Use 1.5" Forstner bit, drill about 0.75" deep.',
-            "Sand grip edges smooth with 150–220 grit.",
-            "Ensure no sharp edges.",
-        ])
-
-        self.add_text("Step 11 – Sand All Surfaces:")
-        self.add_bullet_list([
-            "120-grit: remove planer marks.",
-            "150-grit: refine and smooth surfaces.",
-            "220-grit: final pre-finish surface.",
-            "Always sand with the grain where possible.",
-            "Pay extra attention to groove and grip areas.",
-        ])
-
-        self.add_text("Step 12 – Round Edges:")
-        self.add_bullet_list([
-            "Break all sharp edges with 220-grit sandpaper.",
-            'Optional: use router with 0.25" roundover bit.',
-            "Improves comfort and overall appearance.",
-        ])
-
-        self.add_heading("Phase 4: Finishing", 2)
-        self.add_text("Step 13 – Final Cleaning:")
-        self.add_bullet_list([
-            "Vacuum or blow off all dust.",
-            "Wipe with tack cloth.",
-            "Let sit about 30 minutes before finishing.",
-        ])
-
-        self.add_text("Step 14 – Food-Grade Finish:")
-        self.add_bullet_list([
-            "Option 1: mineral oil only (reapply monthly).",
-            "Option 2: beeswax only (protective, premium feel).",
-            "Best: combination – apply mineral oil, then beeswax while still wet and buff.",
-            "Allow at least 24 hours of cure before first use.",
-            "Instruct buyers to reapply finish monthly.",
-        ])
-
-    def add_section_5(self):
-        self.pdf.add_page()
-        self.add_heading("SECTION 5: Etsy Photography & Listing Optimization", 1)
-
-        self.add_heading("Before-You-List Photography Checklist", 2)
-        self.add_bullet_list([
-            "Shoot 20–30 photos and keep the best 8–10.",
-            "Capture multiple angles: 45°, overhead, detail, lifestyle, size reference.",
-            "Show multiple wood combinations if you offer them.",
-            "Use natural daylight where possible (north-facing window).",
-            "Use white/neutral background with minimal clutter.",
-            "Ensure sharp focus and shallow depth of field in hero shots.",
-            "Include hands in at least one lifestyle shot.",
-            "Style with herbs, vegetables, and knife in a real kitchen context.",
-        ])
-
-        self.add_heading("Title Optimization (Keyword-Rich)", 2)
-        self.add_text('Proven format: "[Wood Type] End Grain Cutting Board | [Feature] | [Size] | Handmade [Gift]"')
-        self.add_bullet_list([
-            'Walnut & Maple End Grain Cutting Board | 12x16 Reversible Chopping Board',
-            'Cherry & Ash End Grain Board with Juice Groove | Handmade Woodworking',
-            'Personalized Cutting Board | Walnut, Maple & Cherry | Gift for Chef',
-            'Hardwood End-Grain Cutting Board | Reversible | Housewarming Gift',
-        ])
-
-        self.add_text("Include SEO keywords such as:")
-        self.add_bullet_list([
-            "End-grain cutting board",
-            "Wooden chopping board",
-            "Handmade",
-            "Juice groove",
-            "Reversible",
-            "Personalized/custom",
-            "Specific wood species names",
-        ])
-
-        self.add_heading("Tags Strategy", 2)
-        self.add_text("Primary (high-volume) tags:")
-        self.add_bullet_list([
-            "cutting boards handmade",
-            "end grain cutting board",
-            "wooden chopping board",
-            "kitchen cutting board",
-            "wood cutting board",
-        ])
-
-        self.add_text("Secondary (niche) tags:")
-        self.add_bullet_list([
-            "walnut maple cutting board",
-            "chef gift ideas",
-            "housewarming gifts",
-            "wedding registry",
-            "artisan woodworking",
-        ])
-
-        self.add_heading("Pricing Strategy", 2)
-        self.add_text('Base price for 12" × 16" end-grain board: $55–$75.')
-        self.add_text("Add-ons:")
-        self.add_bullet_list([
-            "Three-color pattern: +$10–$15",
-            "Personalization/engraving: +$15–$25",
-            'Larger size (14" × 18"): +$15–$20',
-            "Exotic woods: +$10–$30",
-            "Premium hand-rubbed finish: +$5–$10",
-        ])
-
-        self.add_text("Shipping considerations:")
-        self.add_bullet_list([
-            "Board weight typically 3–4 lbs.",
-            'Use a 2–3" padded box.',
-            "Shipping cost often $12–$18.",
-            "Free shipping at $75–$85 price point can significantly improve conversion.",
-        ])
-
-    def add_section_6(self):
-        self.pdf.add_page()
-        self.add_heading("SECTION 6: Business & Production Strategy", 1)
-
-        self.add_heading("Batch Production for Profitability", 2)
-        self.add_text("Approximate efficiency per 5-board batch:")
-        self.add_bullet_list([
-            "Material prep (ripping, planing): 2–3 hours total.",
-            "Glue-up & clamping: about 30 minutes for the batch.",
-            "Surfacing & shaping: 1.5–2 hours per board.",
-            "Finishing: ~30 minutes per board (+ cure time).",
-            "Overall: about 4–5 hours of active work per board in a batch.",
-        ])
-
-        self.add_heading("Cost Analysis (per finished board)", 2)
-        self.add_bullet_list([
-            "Wood (3 species): $40–$60",
-            "Glue, sandpaper, finish: $3–$5",
-            "Packaging & care card: $2–$3",
-            "Total materials: about $45–$68",
-            "Labor (5 hours @ $20/hr): about $100 (single board basis)",
-            "Total cost: $145–$168 if you only build one board.",
-        ])
-
-        self.add_text("Batch solution:")
-        self.add_bullet_list([
-            "Spread labor across 5+ boards.",
-            "Effective labor per board ~1–2 hours.",
-            "Total cost per board can land around $65–$88.",
-            "Retail at $65–$85 becomes viable with batching.",
-        ])
-
-        self.add_heading("Best-Selling Variations", 2)
-        self.add_bullet_list([
-            "Premium: Three-color end-grain ($75–$85) – highest perceived value.",
-            "Standard: Two-color Maple/Walnut ($55–$70) – fastest to produce.",
-            "Entry: Solid hardwood ($45–$60) – simplest build, higher volume.",
-        ])
-
-    def add_section_7(self):
-        self.pdf.add_page()
-        self.add_heading("SECTION 7: Selling Your Woodworking Plan", 1)
-
-        self.add_heading("Plan Listing Title", 2)
-        self.add_text(
-            "Example: Professional End-Grain Cutting Board Plan – Etsy-Proven Design with Photography Guide"
-        )
-
-        self.add_heading("What the Plan Includes", 2)
-        self.add_bullet_list([
-            "Step-by-step instructions.",
-            "Complete materials & tools lists.",
-            "Professional photography guide.",
-            "Etsy optimization strategies.",
-            "Pricing & production efficiency tips.",
-            "Marketing copy templates.",
-            "Design variations.",
-            "Troubleshooting section.",
-            "PDF format (printable, color, 20+ pages).",
-        ])
-
-        self.add_heading("Plan Pricing", 2)
-        self.add_bullet_list([
-            "Standard pricing: $19–$29 (typical range for quality plans).",
-            "Position as premium because it includes business and photography guidance.",
-            "Offer launch discount ($14–$17) to gather early reviews.",
-            "Bundle idea: Plan + care card template at $22–$24.",
-        ])
-
-    def add_section_8(self):
-        self.pdf.add_page()
-        self.add_heading("SECTION 8: Troubleshooting & Tips", 1)
-
-        self.add_text("Common problems and solutions:")
-        self.add_bullet_list([
-            "Gaps between strips → wood not jointed flat or uneven clamping → joint, re-plane, use even clamp pressure.",
-            "Glue joints separating → insufficient glue or too long open time → use Titebond III and clamp longer.",
-            "Grain tear-out → sanding against grain → always sand with the grain, begin at 120-grit.",
-            "Sticky finish → excess oil or too little cure time → wipe off extra and allow 24 hours.",
-            "Warping → humidity swings or uneven sealing → finish both sides and store flat in controlled space.",
-            "Splinter-prone groove → sharp corners or poor sanding → use roundover bit and finish sand to 220-grit.",
-        ])
-
-    def add_checklists(self):
-        self.pdf.add_page()
-        self.add_heading("FINAL CHECKLIST: From Build to Sale", 1)
-
-        self.add_heading("Build Checklist", 2)
-        self.add_bullet_list([
-            "Wood selected, inspected, planed to uniform thickness.",
-            'Strips ripped to uniform 3" width and crosscut to 12".',
-            "Layout planned and photographed.",
-            "Glue-up square and clamped for at least 6 hours.",
-            "Excess glue removed and surfaces flat.",
-            "Juice groove routed and sanded.",
-            "Finger grips drilled and sanded smooth.",
-            "All surfaces sanded 120 → 150 → 220 grit.",
-            "Edges rounded and splinters eliminated.",
-            "Final dust removal completed.",
-        ])
-
-        self.add_heading("Photography Checklist", 2)
-        self.add_bullet_list([
-            "White backdrop paper set up with curved transition.",
-            "Lighting positioned at 45° from both sides.",
-            "Hero shot captured at 45° angle.",
-            "Overhead flat lay shot taken.",
-            "Lifestyle shot with food and knife.",
-            "Detail close-up of grain and finish.",
-            "Size reference photo taken.",
-            "10 best photos selected and color-corrected.",
-            "Photos optimized for web (e.g., 1200 px wide).",
-        ])
-
-        self.add_heading("Listing Checklist", 2)
-        self.add_bullet_list([
-            "Title includes strong keywords (end-grain, size, wood types).",
-            "All 10 Etsy photo slots used.",
-            "Description lists features and benefits clearly.",
-            "Price set within $55–$85 range, aligned with options.",
-            "13 best tags selected (mix of broad and niche).",
-            "Shipping cost set or free-shipping strategy chosen.",
-            "Care instructions card included with product.",
-            "Final splinter and quality check completed.",
-        ])
-
-    def add_conclusion(self):
-        self.pdf.add_page()
-        self.add_heading("CONCLUSION", 1)
-
-        self.add_text("Summary details:")
-        self.add_bullet_list([
-            "Plan Version: 2.0 – Etsy Optimized Edition",
-            "Updated: December 2025",
-            "Recommended Retail Price: $55–$85",
-            "Market Demand: High (consistent bestseller across handmade channels).",
-            "Skill Level: Intermediate.",
-            "Estimated Production Time: 4–5 hours (in batch production).",
-        ])
-
-        self.add_text(
-            "This professional guide provides complete woodworking, photography, and business strategy for selling "
-            "cutting boards. Follow all safety procedures, use food-grade materials exclusively, and provide "
-            "clear care instructions with each finished board. Ready to list on Etsy or sell locally."
-        )
-
-    # ---------- public API ----------
-
-    def generate(self, filename: str = "cutting_board_plan.pdf") -> str:
-        self.add_title_page()
-        self.add_toc()
-        self.add_section_1()
-        self.add_section_2()
-        self.add_section_3()
-        self.add_section_4()
-        self.add_section_5()
-        self.add_section_6()
-        self.add_section_7()
-        self.add_section_8()
-        self.add_checklists()
-        self.add_conclusion()
-        self.pdf.output(filename)
-        return filename
-
-
-if __name__ == "__main__":
-    plan = CuttingBoardPlan()
-    out_file = plan.generate("cutting_board_plan.pdf")
-    print(f"Generated PDF: {out_file}")
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Professional End-Grain Cutting Board Plan – Etsy Edition</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
+      line-height: 1.6;
+      color: #222;
+    }
+    h1, h2, h3 {
+      margin-top: 32px;
+      font-weight: bold;
+    }
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.6rem; }
+    h3 { font-size: 1.2rem; }
+    ul { margin-left: 20px; }
+    .title-page {
+      text-align: center;
+      margin-top: 80px;
+      margin-bottom: 60px;
+    }
+    .toc li {
+      margin-bottom: 6px;
+    }
+    .section {
+      margin-bottom: 50px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="title-page">
+    <h1>Professional End-Grain Cutting Board Plan</h1>
+    <h2>Etsy Edition | Complete Woodworking Guide</h2>
+    <p>Finished Dimensions: 12" × 16" × 1.75"<br>
+       Skill Level: Intermediate<br>
+       Build Time: 6–8 hours<br>
+       Market Value: $55–$85<br>
+       Plan Version: 2.0 – Etsy Optimized Edition
+    </p>
+  </div>
+
+  <div class="section">
+    <h1>TABLE OF CONTENTS</h1>
+    <ul class="toc">
+      <li>1. Professional Photography & Visual Guide</li>
+      <li>2. Construction Fundamentals</li>
+      <li>3. Materials & Tools</li>
+      <li>4. Step-by-Step Construction</li>
+      <li>5. Etsy Photography & Listing Optimization</li>
+      <li>6. Business & Production Strategy</li>
+      <li>7. Selling Your Woodworking Plan</li>
+      <li>8. Troubleshooting & Tips</li>
+      <li>9. Checklists</li>
+      <li>10. Conclusion</li>
+    </ul>
+  </div>
+
+  <!-- SECTION 1 (shortened for demo; you can expand fully) -->
+  <div class="section">
+    <h1>SECTION 1: Professional Photography & Visual Guide</h1>
+    <h2>Hero Product Photos</h2>
+    <p>Your photography determines Etsy success. Top sellers use consistent lighting, clean backgrounds, and lifestyle shots.</p>
+
+    <h3>Lighting Setup</h3>
+    <ul>
+      <li>White seamless backdrop</li>
+      <li>Two diffused LED or work lights</li>
+      <li>White bounce reflector</li>
+      <li>Tripod, no on-camera flash</li>
+    </ul>
+
+    <h3>Key Photos to Capture</h3>
+    <ul>
+      <li>45° hero shot</li>
+      <li>Overhead shot</li>
+      <li>Lifestyle shot</li>
+      <li>Detail close-ups</li>
+      <li>Size reference</li>
+    </ul>
+  </div>
+
+  <!-- You can continue adding full sections here. -->
+
+  <footer style="margin-top:80px; text-align:center; font-size:0.9rem;">
+    <p>© 2025 Professional End-Grain Cutting Board Plan – Etsy Edition</p>
+  </footer>
+
+</body>
+</html>
