@@ -1,97 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
- <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Professional End-Grain Cutting Board Plan – Etsy Edition</title>
-  <style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cutting Board Plans</title>
+<style>
     body {
-      font-family: Arial, sans-serif;
-      max-width: 900px;
-      margin: auto;
-      padding: 20px;
-      line-height: 1.6;
-      color: #222;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: #f4f4f4;
+        color: #333;
     }
-    h1, h2, h3 {
-      margin-top: 32px;
-      font-weight: bold;
+    header {
+        background: #222;
+        color: #fff;
+        padding: 20px;
+        text-align: center;
     }
-    h1 { font-size: 2rem; }
-    h2 { font-size: 1.6rem; }
-    h3 { font-size: 1.2rem; }
-    ul { margin-left: 20px; }
-    .title-page {
-      text-align: center;
-      margin-top: 80px;
-      margin-bottom: 60px;
+    .container {
+        width: 90%;
+        max-width: 900px;
+        margin: auto;
+        padding: 20px;
+        background: #fff;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        margin-top: 30px;
+        margin-bottom: 30px;
+        border-radius: 8px;
     }
-    .toc li {
-      margin-bottom: 6px;
+    h1, h2 {
+        text-align: center;
     }
-    .section {
-      margin-bottom: 50px;
+    .step {
+        margin-bottom: 20px;
     }
-  </style>
+    .step-title {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 6px;
+        color: #444;
+    }
+    ul {
+        margin-top: 8px;
+    }
+    .footer {
+        text-align: center;
+        padding: 20px;
+        color: #777;
+    }
+</style>
 </head>
+
 <body>
 
-  <div class="title-page">
-    <h1>Professional End-Grain Cutting Board Plan</h1>
-    <h2>Etsy Edition | Complete Woodworking Guide</h2>
-    <p>Finished Dimensions: 12" × 16" × 1.75"<br>
-       Skill Level: Intermediate<br>
-       Build Time: 6–8 hours<br>
-       Market Value: $55–$85<br>
-       Plan Version: 2.0 – Etsy Optimized Edition
-    </p>
-  </div>
+<header>
+    <h1>Cutting Board Plans</h1>
+    <p>Your complete guide to building a beautiful wood cutting board</p>
+</header>
 
-  <div class="section">
-    <h1>TABLE OF CONTENTS</h1>
-    <ul class="toc">
-      <li>1. Professional Photography & Visual Guide</li>
-      <li>2. Construction Fundamentals</li>
-      <li>3. Materials & Tools</li>
-      <li>4. Step-by-Step Construction</li>
-      <li>5. Etsy Photography & Listing Optimization</li>
-      <li>6. Business & Production Strategy</li>
-      <li>7. Selling Your Woodworking Plan</li>
-      <li>8. Troubleshooting & Tips</li>
-      <li>9. Checklists</li>
-      <li>10. Conclusion</li>
-    </ul>
-  </div>
+<div class="container">
 
-  <!-- SECTION 1 (shortened for demo; you can expand fully) -->
-  <div class="section">
-    <h1>SECTION 1: Professional Photography & Visual Guide</h1>
-    <h2>Hero Product Photos</h2>
-    <p>Your photography determines Etsy success. Top sellers use consistent lighting, clean backgrounds, and lifestyle shots.</p>
-
-    <h3>Lighting Setup</h3>
+    <h2>Materials</h2>
     <ul>
-      <li>White seamless backdrop</li>
-      <li>Two diffused LED or work lights</li>
-      <li>White bounce reflector</li>
-      <li>Tripod, no on-camera flash</li>
+        <li>1 board: 1 in x 8 in x 8 ft (Walnut, Maple, Cherry, etc.)</li>
+        <li>Wood glue</li>
+        <li>Food-grade mineral oil</li>
+        <li>Sandpaper: 80, 120, 220, 400 grit</li>
+        <li>Clamps</li>
     </ul>
 
-    <h3>Key Photos to Capture</h3>
+    <h2>Tools</h2>
     <ul>
-      <li>45° hero shot</li>
-      <li>Overhead shot</li>
-      <li>Lifestyle shot</li>
-      <li>Detail close-ups</li>
-      <li>Size reference</li>
+        <li>Table saw or circular saw</li>
+        <li>Planer (optional)</li>
+        <li>Orbital sander</li>
+        <li>Router (optional)</li>
     </ul>
-  </div>
 
-  <!-- You can continue adding full sections here. -->
+    <h2>Cutting Board Build Steps</h2>
 
-  <footer style="margin-top:80px; text-align:center; font-size:0.9rem;">
-    <p>© 2025 Professional End-Grain Cutting Board Plan – Etsy Edition</p>
-  </footer>
+    <div class="step">
+        <div class="step-title">Step 1 — Cut Into Strips</div>
+        <p>Rip the 8 ft board into strips between 1"–1.5" wide.</p>
+    </div>
+
+    <div class="step">
+        <div class="step-title">Step 2 — Arrange Your Pattern</div>
+        <p>Lay out the strips in the order you like (alternating colors looks great).</p>
+    </div>
+
+    <div class="step">
+        <div class="step-title">Step 3 — Glue the Strips</div>
+        <p>Apply wood glue to all edges and clamp for at least 4 hours.</p>
+    </div>
+
+    <div class="step">
+        <div class="step-title">Step 4 — Flatten the Board</div>
+        <p>Use a planer or sander to smooth both faces.</p>
+    </div>
+
+    <div class="step">
+        <div class="step-title">Step 5 — Trim to Final Size</div>
+        <p>Square the edges with a table saw.</p>
+    </div>
+
+    <div class="step">
+        <div class="step-title">Step 6 — Sand Smooth</div>
+        <p>Sand progressively: 80 → 120 → 220 → 400 grit.</p>
+    </div>
+
+    <div class="step">
+        <div class="step-title">Step 7 — Oil the Board</div>
+        <p>Apply food-safe mineral oil until the board stops absorbing.</p>
+    </div>
+
+    <h2>Finished Dimensions</h2>
+    <p>A typical board from a single 8 ft 1x8 produces a cutting board around:</p>
+    <ul>
+        <li>12"–16" long</li>
+        <li>10"–12" wide</li>
+        <li>1"–1.25" thick</li>
+    </ul>
+
+</div>
+
+<div class="footer">
+    <p>© 2025 Cutting Board Plans</p>
+</div>
 
 </body>
 </html>
